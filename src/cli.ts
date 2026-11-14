@@ -58,6 +58,8 @@ async function main(): Promise<void> {
     fail(`Unknown preset "${values.preset}". Available: ${presets.map((x) => x.name).join(", ")}`);
   }
 
+  if (yes && values.description === undefined) fail("--description is required with --yes");
+
   p.intro(`scaffy ${pkg.version}`);
 
   const projectName =
@@ -72,9 +74,10 @@ async function main(): Promise<void> {
           }),
         ));
 
-  let description = values.description;
-  if (description === undefined) {
-    if (yes) fail("--description is required with --yes");
+  let description: string;
+  if (values.description !== undefined) {
+    description = values.description;
+  } else {
     description = guard(
       await p.text({
         message: "What is this project about?",
@@ -84,16 +87,16 @@ async function main(): Promise<void> {
     );
   }
 
-  const preset =
+  const preset: string =
     values.preset ??
     (yes
       ? "none"
-      : guard(
+      : (guard(
           await p.select({
             message: "Which preset?",
             options: presets.map((x) => ({ value: x.name, label: x.name, hint: x.description })),
           }),
-        ));
+        ) as string));
 
   const symlinks = values["no-symlinks"]
     ? false
