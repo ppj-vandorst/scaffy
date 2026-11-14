@@ -29,6 +29,8 @@ Done when: every top-level module is accounted for and each claim you will write
 
 For each context file, draft a version that describes the code as it is now. Keep the frontmatter `description`; adjust it only if the file's purpose changed.
 
+`code-comments.md` and `writing-style.md` are rules for writing, not descriptions of the code. Leave them as they are; if the code breaks a rule, list the drift as a follow-up.
+
 - Write what a reader cannot cheaply look up: structure, dependency rules, conventions, the reason behind a choice. For commands and versions, name the file that defines them.
 - Replace placeholder text ("Not filled in yet") with real content.
 - Add a new context file when a topic is substantial and fits none of the existing ones; give it a `description` saying when to read it.

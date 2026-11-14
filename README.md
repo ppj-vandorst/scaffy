@@ -21,9 +21,9 @@ CLAUDE.md                 managed section: @AGENTS.md
 .ai/
   INDEX.md
   .scaffy.json            what was installed (version, preset, date)
-  context/                overview, architecture, conventions, tech-stack + INDEX.md
+  context/                overview, architecture, conventions, tech-stack, code-comments, writing-style + INDEX.md
   prompts/                onboard, plan-change, handoff (+ preset prompts) + INDEX.md
-  skills/                 update-context (+ preset skills) + INDEX.md
+  skills/                 update-context, create-pr, write-documentation (+ preset skills) + INDEX.md
 .claude/skills/<name>       → ../../.ai/skills/<name>        (optional)
 .claude/commands/<name>.md  → ../../.ai/prompts/<name>.md    (optional)
 ```

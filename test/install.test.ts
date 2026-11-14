@@ -46,6 +46,26 @@ describe("install", () => {
     expect(await read(".ai/context/overview.md")).toContain("Manages customer orders. Second sentence.");
   });
 
+  it("installs the writing skills and rules in the base layer", async () => {
+    const report = await install(opts({ preset: "none" }));
+
+    expect(report.created).toEqual(
+      expect.arrayContaining([
+        ".ai/context/code-comments.md",
+        ".ai/context/writing-style.md",
+        ".ai/skills/create-pr/SKILL.md",
+        ".ai/skills/write-documentation/SKILL.md",
+      ]),
+    );
+    const context = await read(".ai/context/INDEX.md");
+    expect(context).toContain("- [code-comments.md](code-comments.md): Read before writing or editing code comments");
+    expect(context).toContain("- [writing-style.md](writing-style.md): Read before writing prose");
+    const skills = await read(".ai/skills/INDEX.md");
+    expect(skills).toContain("- [create-pr](create-pr/SKILL.md): Open a pull request");
+    expect(skills).toContain("- [write-documentation](write-documentation/SKILL.md): Write or edit documentation");
+    expect(await read("AGENTS.md")).toContain("follow the `write-documentation` skill");
+  });
+
   it("uses the stub architecture for the none preset", async () => {
     await install(opts({ preset: "none" }));
     expect(await read(".ai/context/architecture.md")).toContain("Not filled in yet");
