@@ -52,3 +52,4 @@ npm run build && node dist/cli.js --dir /tmp/some-project
 ```
 
 See `GLOSSARY.md` for the domain language and `docs/adr/` for design decisions.
+
