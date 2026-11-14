@@ -1,0 +1,31 @@
+{
+  "name": "scaffy",
+  "version": "0.1.0",
+  "description": "Add AI-agent scaffolding (AGENTS.md, CLAUDE.md, .ai/ context, prompts and skills) to any project",
+  "type": "module",
+  "bin": {
+    "scaffy": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "license": "MIT"
+}
