@@ -7,3 +7,5 @@ Facts about this project. Read the files relevant to your task before changing c
 - [conventions.md](conventions.md): Read before writing code. Naming, code style, error handling and testing habits this codebase follows.
 - [overview.md](overview.md): Read first. What this project is, who uses it and why it exists.
 - [tech-stack.md](tech-stack.md): Read when adding dependencies, running builds or tests. Languages, frameworks, build tool and key commands.
+- [code-comments.md](code-comments.md): Read before writing or editing code comments. When a comment is warranted and what it may say.
+- [writing-style.md](writing-style.md): Read before writing prose for humans (docs, PR descriptions, commit messages, error messages). Rules for clear, concise writing.

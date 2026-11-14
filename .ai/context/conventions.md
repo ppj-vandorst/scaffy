@@ -10,7 +10,7 @@ description: Read before writing code. Naming, code style, error handling and te
 - **Modules:** named exports only. Relative imports carry the `.js` extension (`./install.js`). Node built-ins use the `node:` prefix (`node:fs`, `node:path`).
 - **Filesystem:** `promises as fs` from `node:fs`. Use small local helpers (`exists`, `lexists`, `walk`) instead of extra dependencies.
 - **Types:** exported `interface`s for options and reports (`InstallOptions`, `InstallReport`). Derive string unions from `as const` arrays (`Folder`). Use `type` imports for type-only imports.
-- **Comments:** short and about *why*. In `install()`, numbered step comments (`// 1. …`) mark the phases. A one-line JSDoc goes on exported helpers whose contract is not obvious from the name.
+- **Comments:** follow `code-comments.md`: only *why*, never *what*. A one-line JSDoc goes on exported helpers whose contract is not obvious from the name.
 - **Determinism:** sort everything the install writes or reports (files, index entries, symlinks) so output is stable across machines.
 
 ## Domain language

@@ -82,7 +82,6 @@ export async function install(opts: InstallOptions): Promise<InstallReport> {
     manifest: path.join(AI_DIR, ".scaffy.json"),
   };
 
-  // 1. Lay the Preset over the Base Layer; create missing files only.
   const layers = [
     path.join(TEMPLATES_DIR, "base", "ai"),
     path.join(TEMPLATES_DIR, "presets", opts.preset, "ai"),
@@ -103,12 +102,11 @@ export async function install(opts: InstallOptions): Promise<InstallReport> {
     report.created.push(relDest);
   }
 
-  // 2. Indexes reflect what is on disk, including files the user added.
+  // Indexes are rebuilt from disk so files the user added get entries too.
   for (const folder of FOLDERS) {
     report.indexes.push(await writeIndex(target, folder));
   }
 
-  // 3. Managed Sections in AGENTS.md and CLAUDE.md.
   for (const file of ["AGENTS.md", "CLAUDE.md"]) {
     const body = render(
       await fs.readFile(path.join(TEMPLATES_DIR, "sections", file), "utf8"),
@@ -121,10 +119,9 @@ export async function install(opts: InstallOptions): Promise<InstallReport> {
     report.sections.push({ path: file, result });
   }
 
-  // 4. Expose Skills and Prompts to Claude Code via per-file symlinks.
   if (opts.symlinks) await createSymlinks(target, report);
 
-  // 5. Manifest, so a future upgrade knows what was installed.
+  // The manifest lets a future upgrade know what was installed.
   const manifestPath = path.join(target, report.manifest);
   let installedAt = (opts.now ?? new Date()).toISOString();
   if (await exists(manifestPath)) {
