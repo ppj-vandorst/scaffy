@@ -17,13 +17,15 @@
     "build": "tsc",
     "prepare": "npm run build",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint:deps": "depcruise src"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.0",
+    "dependency-cruiser": "^18.7.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   },

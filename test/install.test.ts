@@ -52,6 +52,25 @@ describe("install", () => {
     await expect(read(".ai/skills/add-use-case/SKILL.md")).rejects.toThrow();
   });
 
+  it("installs the node-cli-typescript preset with its context and skills", async () => {
+    const report = await install(opts({ preset: "node-cli-typescript" }));
+
+    expect(report.created).toEqual(
+      expect.arrayContaining([
+        ".ai/context/architecture.md",
+        ".ai/context/cli-conventions.md",
+        ".ai/skills/add-command/SKILL.md",
+        ".ai/skills/review-architecture/SKILL.md",
+      ]),
+    );
+    expect(await read(".ai/context/architecture.md")).toContain("dependency-cruiser");
+    expect(await read(".ai/context/INDEX.md")).toContain("- [cli-conventions.md](cli-conventions.md)");
+    const skills = await read(".ai/skills/INDEX.md");
+    expect(skills).toContain("- [add-command](add-command/SKILL.md)");
+    expect(skills).toContain("- [review-architecture](review-architecture/SKILL.md)");
+    await expect(read(".ai/prompts/review-architecture.md")).rejects.toThrow();
+  });
+
   it("rejects an unknown preset", async () => {
     await expect(install(opts({ preset: "nope" }))).rejects.toThrow(/Unknown preset/);
   });
@@ -144,7 +163,7 @@ describe("install", () => {
 describe("listPresets", () => {
   it("lists real presets before none", async () => {
     const names = (await listPresets()).map((p) => p.name);
-    expect(names).toEqual(["java-spring-hexagonal", "none"]);
+    expect(names).toEqual(["java-spring-hexagonal", "node-cli-typescript", "none"]);
   });
 });
 
